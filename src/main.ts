@@ -167,6 +167,7 @@ export async function run(context: Context): Promise<void> {
       return
     }
   } catch (error: unknown) {
+    setFailed(`BRETTFO: error: ${error}`, null)
     if (error instanceof Error) {
       // If we've reached this point, we do not have a viable
       // API client to report back to Dependabot API.

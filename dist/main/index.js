@@ -128659,6 +128659,7 @@ async function run(context) {
         }
     }
     catch (error) {
+        setFailed(`BRETTFO: error: ${error}`, null);
         if (error instanceof Error) {
             // If we've reached this point, we do not have a viable
             // API client to report back to Dependabot API.

@@ -19,32 +19,33 @@ export class JobParameters {
 
 export function getJobParameters(ctx: Context): JobParameters | null {
   checkEnvironmentAndContext(ctx)
+  return fromWorkflowInputs(ctx)
 
-  if (ctx.actor !== DEPENDABOT_ACTOR) {
-    core.warning(
-      `This workflow can only be triggered by Dependabot. Actor was '${ctx.actor}'.`
-    )
-    return null
-  }
+  // if (ctx.actor !== DEPENDABOT_ACTOR) {
+  //   core.warning(
+  //     `This workflow can only be triggered by Dependabot. Actor was '${ctx.actor}'.`
+  //   )
+  //   return null
+  // }
 
-  if (
-    process.env.GITHUB_TRIGGERING_ACTOR &&
-    process.env.GITHUB_TRIGGERING_ACTOR !== DEPENDABOT_ACTOR
-  ) {
-    core.warning(
-      'Dependabot workflows cannot be re-run. Retrigger this update via Dependabot instead.'
-    )
-    return null
-  }
+  // if (
+  //   process.env.GITHUB_TRIGGERING_ACTOR &&
+  //   process.env.GITHUB_TRIGGERING_ACTOR !== DEPENDABOT_ACTOR
+  // ) {
+  //   core.warning(
+  //     'Dependabot workflows cannot be re-run. Retrigger this update via Dependabot instead.'
+  //   )
+  //   return null
+  // }
 
-  if (ctx.eventName === DYNAMIC) {
-    return fromWorkflowInputs(ctx)
-  } else {
-    core.warning(
-      `Dependabot Updater Action does not support '${ctx.eventName}' events.`
-    )
-    return null
-  }
+  // if (ctx.eventName === DYNAMIC) {
+  //   return fromWorkflowInputs(ctx)
+  // } else {
+  //   core.warning(
+  //     `Dependabot Updater Action does not support '${ctx.eventName}' events.`
+  //   )
+  //   return null
+  // }
 }
 
 function checkEnvironmentAndContext(ctx: Context): boolean {

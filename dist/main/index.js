@@ -89265,7 +89265,7 @@ let AESGCMDecipher;
 let ChaChaPolyDecipher;
 let GenericDecipher;
 try {
-  binding = __nccwpck_require__(8440);
+  binding = __nccwpck_require__(490);
   ({ AESGCMCipher, ChaChaPolyCipher, GenericCipher,
      AESGCMDecipher, ChaChaPolyDecipher, GenericDecipher } = binding);
 } catch {}
@@ -128447,22 +128447,30 @@ class JobParameters {
 exports.JobParameters = JobParameters;
 function getJobParameters(ctx) {
     checkEnvironmentAndContext(ctx);
-    if (ctx.actor !== DEPENDABOT_ACTOR) {
-        core.warning(`This workflow can only be triggered by Dependabot. Actor was '${ctx.actor}'.`);
-        return null;
-    }
-    if (process.env.GITHUB_TRIGGERING_ACTOR &&
-        process.env.GITHUB_TRIGGERING_ACTOR !== DEPENDABOT_ACTOR) {
-        core.warning('Dependabot workflows cannot be re-run. Retrigger this update via Dependabot instead.');
-        return null;
-    }
-    if (ctx.eventName === DYNAMIC) {
-        return fromWorkflowInputs(ctx);
-    }
-    else {
-        core.warning(`Dependabot Updater Action does not support '${ctx.eventName}' events.`);
-        return null;
-    }
+    return fromWorkflowInputs(ctx);
+    // if (ctx.actor !== DEPENDABOT_ACTOR) {
+    //   core.warning(
+    //     `This workflow can only be triggered by Dependabot. Actor was '${ctx.actor}'.`
+    //   )
+    //   return null
+    // }
+    // if (
+    //   process.env.GITHUB_TRIGGERING_ACTOR &&
+    //   process.env.GITHUB_TRIGGERING_ACTOR !== DEPENDABOT_ACTOR
+    // ) {
+    //   core.warning(
+    //     'Dependabot workflows cannot be re-run. Retrigger this update via Dependabot instead.'
+    //   )
+    //   return null
+    // }
+    // if (ctx.eventName === DYNAMIC) {
+    //   return fromWorkflowInputs(ctx)
+    // } else {
+    //   core.warning(
+    //     `Dependabot Updater Action does not support '${ctx.eventName}' events.`
+    //   )
+    //   return null
+    // }
 }
 function checkEnvironmentAndContext(ctx) {
     let valid = true;
@@ -129398,10 +129406,11 @@ module.exports = require(__nccwpck_require__.ab + "build/Release/cpufeatures.nod
 
 /***/ }),
 
-/***/ 8440:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 490:
+/***/ ((module) => {
 
-module.exports = require(__nccwpck_require__.ab + "lib/protocol/crypto/build/Release/sshcrypto.node")
+module.exports = eval("require")("./crypto/build/Release/sshcrypto.node");
+
 
 /***/ }),
 
